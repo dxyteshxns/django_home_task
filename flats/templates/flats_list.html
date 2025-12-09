@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    <h1>Flats Catalog</h1>
+
+    <ul>
+        {% for flat in all_flats %}
+            <li>
+                <h3> {{ flat.title }} </h3>
+                <strong> ${{ flat.price }} </strong>
+                <small> {{ flat.type }} </small>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

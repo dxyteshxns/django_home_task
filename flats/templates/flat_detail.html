@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    <h1>{{ flat.title }}</h1>
+
+    <dl>
+        <dt>Price</dt>
+        <dd>${{ flat.price }}</dd>
+
+        <dt>Type</dt>
+        <dd>{{ flat.type }}</dd>
+
+        <dt>Rooms</dt>
+        <dd>{{ flat.bedrooms }}</dd>
+
+        <dt>Bathrooms</dt>
+        <dd>{{ flat.bathrooms }}</dd>
+
+        <dt>Area</dt>
+        <dd>{{ flat.area }} m²</dd>
+
+        <dt>Owner</dt>
+        <dd>{{ flat.owner.username }}</dd>
+    </dl>
+{% endblock %}

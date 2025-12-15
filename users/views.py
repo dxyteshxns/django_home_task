@@ -1,3 +1,19 @@
 from django.shortcuts import render
+from django.http import  HttpRequest, HttpResponse
+from django.contrib.auth import login
+from django.shortcuts import redirect
+from users.forms import SignUpForm
 
-# Create your views here.
+def signup_view(request: HttpRequest):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('flats:flats_list')
+
+    else:
+        form = SignUpForm()
+
+    return render(request, 'signup.html', context={'form': form})
+

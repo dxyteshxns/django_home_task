@@ -36,3 +36,9 @@ class User(AbstractUser):
     objects = CustomUserManager()
     REQUIRED_FIELDS = ['role', 'email']
 
+    def is_owner(self):
+        return self.role.name == "owner"
+
+
+    def is_seeker(self):
+        return self.role.name == "seeker"

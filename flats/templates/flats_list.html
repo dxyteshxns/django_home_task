@@ -6,7 +6,7 @@
     <ul>
         {% for flat in all_flats %}
             <li>
-                <h3> {{ flat.title }} </h3>
+                <a href="{% url 'flats:flat_detail' flat.pk %}"> {{ flat.title }} </a>
                 <strong> ${{ flat.price }} </strong>
                 <small> {{ flat.type }} </small>
             </li>

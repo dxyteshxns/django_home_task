@@ -3,6 +3,12 @@
 {%block content %}
     <h1>{{ flat.title }}</h1>
 
+{% if flat.image %}
+  <img src="{{ flat.image.url }}" alt="{{ flat.title }}" style="display: block !important; visibility: visible !important;">
+{% else %}
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect fill='%23e9ecef' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23adb5bd'%3ENo Image Available%3C/text%3E%3C/svg%3E" alt="No image" style="display: block !important; visibility: visible !important;">
+{% endif %}
+
     <dl>
         <dt>Price</dt>
         <dd>${{ flat.price }}</dd>
@@ -22,4 +28,13 @@
         <dt>Owner</dt>
         <dd>{{ flat.owner.username }}</dd>
     </dl>
+
+
+{% if user == flat.owner %}
+    <a href="{% url 'flats:flat_edit' flat.id %}">Edit</a>
+    <a href="{% url 'flats:flat_delete' flat.id %}">Delete</a>
+{% elif user.is_seeker %}
+    <a href="{% url 'flats:send_deal_request' flat.id %}">Send Deal Request</a>
+{% endif %}
+
 {% endblock %}

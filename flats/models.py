@@ -25,3 +25,30 @@ class Flat(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class DealRequest(models.Model):
+    WAITING = "waiting"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+
+    STATUS_CHOICES = (
+        (WAITING, "waiting"),
+        (APPROVED, "approved"),
+        (REJECTED, "rejected")
+    )
+
+    flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
+    seeker = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               on_delete=models.CASCADE,
+                               related_name="deal_requests")
+    comment = models.TextField()
+    date_approved = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default=WAITING
+    )
+
+    def __str__(self):
+        return f"Request № {self.id} on {self.flat.title}"
